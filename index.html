@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>World Time</title>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <p id="local">Loading...</p>
+    <div id="output"></div>
+</body>
+
+<script>
+
+    function getUtcTime() {
+        var dt = new Date();
+        var utcOffset = dt.getTimezoneOffset() * 60000;
+        var utcTime = new Date(dt.getTime() + utcOffset);
+        return utcTime.getTime();
+    }
+</script>
+
+</html>
