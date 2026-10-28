@@ -14,6 +14,8 @@
 </body>
 
 <script>
+    var timer = setInterval(displayWorldTime, 1000);
+
     var cities = [
         {name: "Istanbul", utcOffset: 3, flag: "Turkey.png"},
         {name: "New York City", utcOffset: -5, flag: "United-States-of-America.png"},
@@ -26,7 +28,6 @@
     ];
 
     cities.sort(compare);
-    console.log(getCurrentTime(cities[0].utcOffset));
 
     function compare(a, b) {
         var cityA = a.name;
@@ -41,7 +42,6 @@
         return comparison;
     }
 
-
     function getUtcTime() {
         var dt = new Date();
         var utcOffset = dt.getTimezoneOffset() * 60000;
@@ -55,6 +55,31 @@
         return time.toLocaleTimeString();
     }
 
+    function displayWorldTime() {
+        var dt = new Date();
+        document.getElementById("local").innerHTML = "Local time: " + dt.toLocaleTimeString();
+
+        var output = `<table id="cities">`;
+        output += `
+        <tr>
+            <th class="col1"></th>
+            <th class="col2"></th>
+            <th></th>
+        </tr>
+    `;
+
+        for (var a = 0; a < cities.length; a++) {
+            output += `
+            <tr>
+                <td><img src="img/${cities[a].flag}" alt="${cities[a].name}" /></td>
+                <td>${cities[a].name}</td>
+                <td>${getCurrentTime(cities[a].utcOffset)}</td>
+            </tr>
+        `;
+        }
+        output += `</table>`;
+        document.getElementById("output").innerHTML = output;
+    }
 
 
 
